@@ -55,6 +55,12 @@ def _canonical_lockfile_bytes() -> bytes:
     return LOCKFILE.read_bytes().replace(b"\r\n", b"\n")
 
 
+def _canonical_vendored_license_bytes(path: Path) -> bytes:
+    """Return vendored notice bytes independent of Git checkout line endings."""
+
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
 def _locked_dependency_packages() -> list[dict[str, str]]:
     lock_data = tomllib.loads(LOCKFILE.read_text(encoding="utf-8"))
     manifest_data = tomllib.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -240,7 +246,9 @@ def _vendored_package_contents(
         if candidate.is_symlink() or not candidate.is_file():
             continue
         if candidate.name.upper().startswith(LICENSE_PREFIXES):
-            license_files.append((candidate.name, candidate.read_bytes()))
+            license_files.append(
+                (candidate.name, _canonical_vendored_license_bytes(candidate))
+            )
     license_files.sort(key=lambda item: item[0])
     return _normalize_package(locked, package, vendored=True), license_files
 

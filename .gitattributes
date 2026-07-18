@@ -4,3 +4,4 @@ THIRD_PARTY_LICENSES.txt binary
 # Keep generated compliance inputs stable across Windows and Unix checkouts.
 THIRD_PARTY_NOTICES.md text eol=lf
 rust/rwkv-srs-cpu/Cargo.lock text eol=lf
+rust/rwkv-srs-cpu/vendor/** text eol=lf

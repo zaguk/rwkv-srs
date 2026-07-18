@@ -18,8 +18,8 @@
     {
       "mode": "100644",
       "path": ".gitattributes",
-      "sha256": "8dc831f5702a15ff716a5bb07661323a49507151f5bbf95a06dabfcb151f761e",
-      "size": 246
+      "sha256": "34d3dcbe51b722449c9d3fa8ec33018ef7f283908834253cf6d367c1a255fd45",
+      "size": 286
     },
     {
       "mode": "100644",
@@ -432,8 +432,8 @@
     {
       "mode": "100644",
       "path": "scripts/generate_third_party_notices.py",
-      "sha256": "7debcedb05014187fc8e487febdedf1b77506487116f46d18086a6cbcb56ae29",
-      "size": 15698
+      "sha256": "e1563787b69e70f632487539460f32039d4e250c1fdb9fe1f22a9595caa50755",
+      "size": 15947
     },
     {
       "mode": "100644",
@@ -618,8 +618,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "51da08551254aa0e4e2848ba364966495eb24c86",
+  "source_commit": "d090af13c37b0c7d780f0284f5e7b366572bb896",
   "source_file_count": 100,
-  "source_files_sha256": "13f6853eccc97cfffb2cbd209b0456d7e6074fa4470bc8be6d3afd81002918f9",
+  "source_files_sha256": "e94a76c588377856f7a87244dd6b650c91e22349b782254fe28f243ee0003104",
   "source_repository": "rwkv-srs"
 }
