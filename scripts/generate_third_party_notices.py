@@ -19,6 +19,11 @@ LOCKFILE = ROOT / "rust" / "rwkv-srs-cpu" / "Cargo.lock"
 NOTICES = ROOT / "THIRD_PARTY_NOTICES.md"
 LICENSE_ARCHIVE = ROOT / "THIRD_PARTY_LICENSES.txt"
 LICENSE_PREFIXES = ("LICENSE", "LICENCE", "COPYING", "NOTICE")
+VENDORED_PACKAGES = {
+    ("gemm-common", "0.19.0"): (
+        ROOT / "rust" / "rwkv-srs-cpu" / "vendor" / "gemm-common-0.19.0"
+    ),
+}
 
 
 class NoticeError(ValueError):
@@ -50,7 +55,7 @@ def _canonical_lockfile_bytes() -> bytes:
     return LOCKFILE.read_bytes().replace(b"\r\n", b"\n")
 
 
-def _locked_registry_packages() -> list[dict[str, str]]:
+def _locked_dependency_packages() -> list[dict[str, str]]:
     lock_data = tomllib.loads(LOCKFILE.read_text(encoding="utf-8"))
     manifest_data = tomllib.loads(MANIFEST.read_text(encoding="utf-8"))
     workspace = manifest_data.get("package", {})
@@ -61,10 +66,23 @@ def _locked_registry_packages() -> list[dict[str, str]]:
         version = str(value.get("version"))
         source = value.get("source")
         if source is None:
-            if (name, version) != workspace_identity:
+            identity = (name, version)
+            if identity == workspace_identity:
+                continue
+            vendored_path = VENDORED_PACKAGES.get(identity)
+            if vendored_path is None:
                 raise NoticeError(
-                    "unsupported non-registry locked package: " f"{name} {version}"
+                    f"unsupported non-registry locked package: {name} {version}"
                 )
+            relative = vendored_path.relative_to(ROOT).as_posix()
+            packages.append(
+                {
+                    "name": name,
+                    "version": version,
+                    "source": f"vendored+{relative}",
+                    "vendored_path": str(vendored_path),
+                }
+            )
             continue
         if not str(source).startswith("registry+"):
             raise NoticeError(
@@ -73,7 +91,9 @@ def _locked_registry_packages() -> list[dict[str, str]]:
             )
         checksum = value.get("checksum")
         if not checksum:
-            raise NoticeError(f"locked registry package lacks checksum: {name} {version}")
+            raise NoticeError(
+                f"locked registry package lacks checksum: {name} {version}"
+            )
         packages.append(
             {
                 "name": name,
@@ -133,6 +153,10 @@ def _archive_file(archive: tarfile.TarFile, member_name: str) -> bytes:
 def _package_archive_contents(
     locked: dict[str, str],
 ) -> tuple[dict[str, Any], list[tuple[str, bytes]]]:
+    vendored_path = locked.get("vendored_path")
+    if vendored_path is not None:
+        return _vendored_package_contents(locked, Path(vendored_path))
+
     archive_path = _crate_archive(locked)
     root = f"{locked['name']}-{locked['version']}"
     with tarfile.open(archive_path, "r:*") as archive:
@@ -166,6 +190,14 @@ def _package_archive_contents(
             seen_names.add(relative)
             license_files.append((relative, _archive_file(archive, member.name)))
 
+    normalized = _normalize_package(locked, package)
+    license_files.sort(key=lambda item: item[0])
+    return normalized, license_files
+
+
+def _normalize_package(
+    locked: dict[str, str], package: dict[str, Any], *, vendored: bool = False
+) -> dict[str, Any]:
     normalized = {
         "name": locked["name"],
         "version": locked["version"],
@@ -174,14 +206,43 @@ def _package_archive_contents(
         "repository": package.get("repository"),
         "homepage": package.get("homepage"),
         "source": locked["source"],
+        "vendored": vendored,
     }
     if not normalized["license"]:
         raise NoticeError(
             "dependency without declared license metadata: "
             f"{locked['name']} {locked['version']}"
         )
+    return normalized
+
+
+def _vendored_package_contents(
+    locked: dict[str, str], path: Path
+) -> tuple[dict[str, Any], list[tuple[str, bytes]]]:
+    path = path.resolve()
+    root = ROOT.resolve()
+    if not path.is_relative_to(root) or not path.is_dir():
+        raise NoticeError(f"invalid vendored package path: {path}")
+    manifest_path = path / "Cargo.toml"
+    package = tomllib.loads(manifest_path.read_text(encoding="utf-8")).get("package")
+    if not isinstance(package, dict):
+        raise NoticeError(f"{manifest_path} has no [package] table")
+    if (
+        str(package.get("name")) != locked["name"]
+        or str(package.get("version")) != locked["version"]
+    ):
+        raise NoticeError(
+            f"vendored manifest identity differs from Cargo.lock: {manifest_path}"
+        )
+
+    license_files: list[tuple[str, bytes]] = []
+    for candidate in path.iterdir():
+        if candidate.is_symlink() or not candidate.is_file():
+            continue
+        if candidate.name.upper().startswith(LICENSE_PREFIXES):
+            license_files.append((candidate.name, candidate.read_bytes()))
     license_files.sort(key=lambda item: item[0])
-    return normalized, license_files
+    return _normalize_package(locked, package, vendored=True), license_files
 
 
 def _escape_table(value: object) -> str:
@@ -189,6 +250,13 @@ def _escape_table(value: object) -> str:
 
 
 def _source_label(package: dict[str, Any]) -> str:
+    if package.get("vendored"):
+        upstream = package.get("repository") or package.get("homepage")
+        return (
+            f"{package['source']} (upstream: {upstream})"
+            if upstream
+            else str(package["source"])
+        )
     return str(
         package.get("repository")
         or package.get("homepage")
@@ -259,19 +327,20 @@ Linux, macOS, and Windows builds; an individual wheel can contain a subset.
 
 ## Published crates without a root license file
 
-The following crate archives declare an SPDX license in Cargo metadata but do
-not contain a root-level `LICENSE`, `LICENCE`, `COPYING`, or `NOTICE` file. Their
-declared expressions, authors, and repositories remain recorded in the table
-above. Standard texts supplied by other locked packages are retained in the
-license archive where applicable.
+The following crate archives or explicitly vendored sources declare an SPDX
+license in Cargo metadata but do not contain a root-level `LICENSE`, `LICENCE`,
+`COPYING`, or `NOTICE` file. Their declared expressions, authors, and
+repositories remain recorded in the table above. Standard texts supplied by
+other locked packages are retained in the license archive where applicable.
 
 {missing_rows}
 
 ## License text archive
 
 `THIRD_PARTY_LICENSES.txt` contains every unique root-level license and notice
-file shipped in the locked crates.io source archives. Exact duplicate texts are
-stored once and mapped back to every package archive member that supplied them.
+file shipped in the locked crates.io source archives and explicitly patched
+vendored sources. Exact duplicate texts are stored once and mapped back to
+every package member that supplied them.
 """
     return document.encode("utf-8")
 
@@ -303,7 +372,7 @@ def generate() -> tuple[bytes, bytes]:
     packages: list[dict[str, Any]] = []
     license_records: dict[str, tuple[bytes, list[str]]] = {}
     missing_license_files: list[str] = []
-    for locked in _locked_registry_packages():
+    for locked in _locked_dependency_packages():
         package, files = _package_archive_contents(locked)
         packages.append(package)
         package_label = f"{package['name']} {package['version']}"

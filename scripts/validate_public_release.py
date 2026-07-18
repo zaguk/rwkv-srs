@@ -53,6 +53,9 @@ REQUIRED_SDIST_SUFFIXES = (
     "THIRD_PARTY_LICENSES.txt",
     "THIRD_PARTY_NOTICES.md",
     "rust-toolchain.toml",
+    "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/Cargo.toml",
+    "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/LICENSE",
+    "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/RWKV_SRS_PATCH.md",
     "scripts/build_local_artifact.py",
     "scripts/generate_third_party_notices.py",
     "scripts/release_manifest.py",
@@ -87,17 +90,23 @@ def _run(
         env=env,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
-        text=True,
-        errors="replace",
-        bufsize=1,
     )
     assert process.stdout is not None
-    for line in process.stdout:
-        print(line, end="", flush=True)
+    output_buffer = getattr(sys.stdout, "buffer", None)
+    for raw_line in process.stdout:
+        if output_buffer is None:
+            print(
+                raw_line.decode("utf-8", errors="backslashreplace"), end="", flush=True
+            )
+        else:
+            output_buffer.write(raw_line)
+            output_buffer.flush()
+        line = raw_line.decode("utf-8", errors="backslashreplace")
         tail.append(line.rstrip())
     returncode = process.wait()
     if returncode:
         detail = "\n".join(tail)
+        detail = detail.encode("ascii", errors="backslashreplace").decode("ascii")
         if len(detail) > 8_000:
             detail = detail[-8_000:]
         message = f"command failed with exit code {returncode}: {display}"

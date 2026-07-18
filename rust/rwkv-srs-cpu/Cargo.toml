@@ -38,6 +38,13 @@ sha2 = "0.10"
 pollster = "1.0"
 wgpu = { version = "30", default-features = false, features = ["std", "parking_lot", "dx12", "metal", "vulkan", "vulkan-portability", "wgsl"] }
 
+[patch.crates-io]
+# gemm-common 0.19.0 omits target_feature annotations from four AArch64 FP16
+# vector helpers. Baseline ARM64 assemblers therefore reject the otherwise
+# runtime-dispatched code. Keep the exact upstream crate plus the minimal fix
+# in-tree until an upstream release contains it.
+gemm-common = { path = "vendor/gemm-common-0.19.0" }
+
 [profile.release-development]
 inherits = "release"
 # Default profile for local iteration. This keeps the release-style optimization

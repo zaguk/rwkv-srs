@@ -11,8 +11,8 @@
   },
   "export_policy": {
     "id": "rwkv-srs-rust-python-public",
-    "sha256": "748d39e34f5e70afcf7dd2a5dceb87773fabd39854e329cd71e6eeb89d3f73f4",
-    "version": 4
+    "sha256": "50c214fe8b27e4899b026a98c25035fdf103f8e7089dea238954b33fd615ea2e",
+    "version": 5
   },
   "files": [
     {
@@ -48,25 +48,25 @@
     {
       "mode": "100644",
       "path": "THIRD_PARTY_NOTICES.md",
-      "sha256": "a79e93d42863f2138f8fddc76e59728f439255cc16081925ffad32501e808903",
-      "size": 24150
+      "sha256": "8f2dc1269e7f781acb49d81083e3d6cb68e355d885d75c32ca21e48880285143",
+      "size": 24278
     },
     {
       "mode": "100644",
       "path": "docs/PUBLIC_RELEASE.md",
-      "sha256": "c1345bae83dc8013ef51595bdf6ba8d26fc9546aae4e9dabc9cfea532d6b4db7",
-      "size": 7857
+      "sha256": "e15a3c1c7789a0229bc6f3a247dc3bc6271296fd9f9b7b283f3fd0f67eb9d8e7",
+      "size": 8374
     },
     {
       "mode": "100644",
       "path": "pyproject.toml",
-      "sha256": "0142c2ce19d54c515be8366c60c8337a67d3b925b0a3a369ca9a259d5147c3ae",
-      "size": 2860
+      "sha256": "45f63f534d2492b87f1bf734a050659643ef44bc87e8a6bf7e07f4e9e896e4d4",
+      "size": 2945
     },
     {
       "mode": "100644",
       "path": "release/public_export_policy.json",
-      "sha256": "748d39e34f5e70afcf7dd2a5dceb87773fabd39854e329cd71e6eeb89d3f73f4",
+      "sha256": "50c214fe8b27e4899b026a98c25035fdf103f8e7089dea238954b33fd615ea2e",
       "size": 6008
     },
     {
@@ -78,14 +78,14 @@
     {
       "mode": "100644",
       "path": "rust/rwkv-srs-cpu/Cargo.lock",
-      "sha256": "64abf24bb884fdf8b45206138dc2227389cffbeb0e51012026de143a87ee1ef8",
-      "size": 45466
+      "sha256": "a83481c02cc3c8d6518955edb2d6f67bf6e31a7e7a83de3b8aa2bbde88842996",
+      "size": 45323
     },
     {
       "mode": "100644",
       "path": "rust/rwkv-srs-cpu/Cargo.toml",
-      "sha256": "2122972663ca4b027185fb88f67c33c042b27e93bf38e8a26c7abe6faff48a61",
-      "size": 1818
+      "sha256": "2a3a39c550c882485e3eb32454bd87503f8f8d966d39087a6d55c796a2c20e99",
+      "size": 2169
     },
     {
       "mode": "100644",
@@ -341,6 +341,84 @@
     },
     {
       "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/Cargo.toml",
+      "sha256": "6fc1ea0cdfe6fee9ea0a51e9a06cac0b6aa7c9b628e0b2d6a9f03cde7a5d6ef9",
+      "size": 2075
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/LICENSE",
+      "sha256": "d64f878c89bd5f1e5ada7e4aad57690b122727cf5229b7b87ea1980c188da1d9",
+      "size": 1062
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/README.md",
+      "sha256": "b5a52644a73efd55e3c035edb28ba24df96e45ddd1373afee844ec95f93700a6",
+      "size": 63
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/RWKV_SRS_PATCH.md",
+      "sha256": "b55bf087f5f98fa23c3b634f87a533881cc8786e05d687243e07c2517d3c41fb",
+      "size": 967
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/cache.rs",
+      "sha256": "dcb68251336e74146f919f8b8362b6638451f06904d22f5e521c901657347d78",
+      "size": 24217
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/gemm.rs",
+      "sha256": "31095a58ca9404e13416b98305f27febe7bc8a8e092195f99a164b966387fc7c",
+      "size": 38548
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/gemv.rs",
+      "sha256": "1c3cec7d4b273f6b3ea84e5b9c09ff455552a2576d16175a5f47448da76e7fd1",
+      "size": 19623
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/gevv.rs",
+      "sha256": "756b82b7cacda66a6e65b287377ed5799fd334fbbae4dc4575caeb7d44b10870",
+      "size": 7046
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/horizontal_microkernel.rs",
+      "sha256": "e58c22659ddad00b4dc7d74df18de7292a3103da9204dfd89d28cebf929b4dc0",
+      "size": 9573
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/lib.rs",
+      "sha256": "4b0fb651df7cc62070f2dcf6dbba96f570c293826fcf5f1aa96a011ca1f98143",
+      "size": 2064
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/microkernel.rs",
+      "sha256": "738a833e019a77d563c946b5883d688593974da255e43ac3ea59dafe016020d5",
+      "size": 79122
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/pack_operands.rs",
+      "sha256": "7c42b9ba308e1cf1e6665e8e3e07608d675fd56b786bdca54ea55126e8c24fa9",
+      "size": 15251
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/src/simd.rs",
+      "sha256": "8faaee8dad605b49c67c4f56fd11c7136be39ac8d80866f45ead61e0c6e138d5",
+      "size": 62379
+    },
+    {
+      "mode": "100644",
       "path": "scripts/build_local_artifact.py",
       "sha256": "a4466e6e1ae8d2db8c5fcb19d15c53296992626a7ff142cee0babe2504cb20ae",
       "size": 11068
@@ -354,8 +432,8 @@
     {
       "mode": "100644",
       "path": "scripts/generate_third_party_notices.py",
-      "sha256": "499c3e34a581ed12628d127e38794fb2bfe970cc47ea01f17ddb2b2acac1a3b6",
-      "size": 13125
+      "sha256": "7debcedb05014187fc8e487febdedf1b77506487116f46d18086a6cbcb56ae29",
+      "size": 15698
     },
     {
       "mode": "100644",
@@ -378,8 +456,8 @@
     {
       "mode": "100644",
       "path": "scripts/validate_public_release.py",
-      "sha256": "3cfe3f53638553171e096712036c88627b767bb4c87a227820408f2283e74c16",
-      "size": 23912
+      "sha256": "35620ca08ef8ec9380ce01ada6316af7234367ccb39d8084d0b6582ed003e9eb",
+      "size": 24453
     },
     {
       "mode": "100644",
@@ -540,8 +618,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "4c4dab5164ae5e0b3f7b0714c1c4f8ded070ab54",
-  "source_file_count": 87,
-  "source_files_sha256": "e772b8d05bb260656347ec39cde8c705187304284085d4537e3d1b92a776e2a0",
+  "source_commit": "51da08551254aa0e4e2848ba364966495eb24c86",
+  "source_file_count": 100,
+  "source_files_sha256": "13f6853eccc97cfffb2cbd209b0456d7e6074fa4470bc8be6d3afd81002918f9",
   "source_repository": "rwkv-srs"
 }

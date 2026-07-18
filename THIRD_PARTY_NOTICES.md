@@ -23,7 +23,7 @@ This inventory was generated from `rust/rwkv-srs-cpu/Cargo.lock`. It covers the
 complete locked graph, including target-specific dependencies for supported
 Linux, macOS, and Windows builds; an individual wheel can contain a subset.
 
-- Cargo.lock SHA-256: `64abf24bb884fdf8b45206138dc2227389cffbeb0e51012026de143a87ee1ef8`
+- Cargo.lock SHA-256: `a83481c02cc3c8d6518955edb2d6f67bf6e31a7e7a83de3b8aa2bbde88842996`
 - Third-party packages: 183
 - Unique bundled license/notice texts: 109
 
@@ -72,7 +72,7 @@ Linux, macOS, and Windows builds; an individual wheel can contain a subset.
 | gemm | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
 | gemm-c32 | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
 | gemm-c64 | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
-| gemm-common | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
+| gemm-common | 0.19.0 | MIT | sarah <> | vendored+rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0 (upstream: https://github.com/sarah-ek/gemm/) |
 | gemm-f16 | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
 | gemm-f32 | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
 | gemm-f64 | 0.19.0 | MIT | sarah <> | https://github.com/sarah-ek/gemm/ |
@@ -215,11 +215,11 @@ Linux, macOS, and Windows builds; an individual wheel can contain a subset.
 
 ## Published crates without a root license file
 
-The following crate archives declare an SPDX license in Cargo metadata but do
-not contain a root-level `LICENSE`, `LICENCE`, `COPYING`, or `NOTICE` file. Their
-declared expressions, authors, and repositories remain recorded in the table
-above. Standard texts supplied by other locked packages are retained in the
-license archive where applicable.
+The following crate archives or explicitly vendored sources declare an SPDX
+license in Cargo metadata but do not contain a root-level `LICENSE`, `LICENCE`,
+`COPYING`, or `NOTICE` file. Their declared expressions, authors, and
+repositories remain recorded in the table above. Standard texts supplied by
+other locked packages are retained in the license archive where applicable.
 
 - `block2 0.6.2`
 - `candle-nn 0.9.2`
@@ -240,5 +240,6 @@ license archive where applicable.
 ## License text archive
 
 `THIRD_PARTY_LICENSES.txt` contains every unique root-level license and notice
-file shipped in the locked crates.io source archives. Exact duplicate texts are
-stored once and mapped back to every package archive member that supplied them.
+file shipped in the locked crates.io source archives and explicitly patched
+vendored sources. Exact duplicate texts are stored once and mapped back to
+every package member that supplied them.

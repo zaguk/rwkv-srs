@@ -24,6 +24,14 @@ The native crate declares Rust 1.87 as its MSRV. Public CI checks that version
 explicitly while ordinary release jobs use the exact compiler pinned in
 `rust-toolchain.toml`.
 
+The native tree vendors one narrowly patched dependency:
+`gemm-common` 0.19.0. Four AArch64 FP16 helpers were missing function-level
+target-feature annotations, causing portable Linux and Windows ARM64 builds to
+fail even though the optional kernels already use runtime feature detection.
+The in-tree patch adds only those annotations; it does not enable FP16
+globally or raise the ARM64 CPU baseline. Its upstream archive hash, rationale,
+and removal condition are recorded beside the vendored MIT-licensed source.
+
 ## Local artifact validation
 
 Install the build tools and run the artifact validator:

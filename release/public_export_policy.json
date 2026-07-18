@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "policy_id": "rwkv-srs-rust-python-public",
-  "policy_version": 4,
+  "policy_version": 5,
   "source_repository": "rwkv-srs",
-  "tracked_paths_sha256": "6103db2b2b263c3064b5b2904faa18aa30c5fe3c8c446afb7aba5722b773d4d9",
+  "tracked_paths_sha256": "2be5d941c1fcadbdb051cff7d8b90fd1ec7b7f5efb5af11b9d654873a9d940d2",
   "rules": [
     {
       "id": "public-root-build",

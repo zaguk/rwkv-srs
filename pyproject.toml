@@ -55,6 +55,7 @@ module-name = "rwkv_srs._native"
 features = ["extension-module"]
 include = [
     { path = "rust-toolchain.toml", format = "sdist" },
+    { path = "rust/rwkv-srs-cpu/vendor/gemm-common-0.19.0/**/*", format = "sdist" },
     { path = "scripts/build_local_artifact.py", format = "sdist" },
     { path = "scripts/generate_third_party_notices.py", format = "sdist" },
     { path = "scripts/release_manifest.py", format = "sdist" },
