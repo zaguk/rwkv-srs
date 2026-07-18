@@ -1,0 +1,547 @@
+{
+  "excluded_classification_counts": {
+    "internal-benchmarks": 11,
+    "internal-build-and-profile-tools": 10,
+    "internal-ci": 1,
+    "internal-documentation": 29,
+    "internal-metrics-package": 48,
+    "internal-root-files": 5,
+    "internal-test-suite": 96,
+    "internal-torch-oracle-source": 13
+  },
+  "export_policy": {
+    "id": "rwkv-srs-rust-python-public",
+    "sha256": "748d39e34f5e70afcf7dd2a5dceb87773fabd39854e329cd71e6eeb89d3f73f4",
+    "version": 4
+  },
+  "files": [
+    {
+      "mode": "100644",
+      "path": ".gitattributes",
+      "sha256": "8dc831f5702a15ff716a5bb07661323a49507151f5bbf95a06dabfcb151f761e",
+      "size": 246
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/public-release.yml",
+      "sha256": "03ae7ddfd485cda6461a868901bb5b687f916db2c8562e310a9f3a4c9c5f6c77",
+      "size": 5634
+    },
+    {
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha256": "eb5f525940eae5f00c712c640051de1bf168305bff642038596bdc00a8f8b9a7",
+      "size": 802
+    },
+    {
+      "mode": "100644",
+      "path": "README.md",
+      "sha256": "95f2d3424688e587bdcbcbfbe28da4cdd7ecb0f9541d76f1b272fa2a5a200564",
+      "size": 6233
+    },
+    {
+      "mode": "100644",
+      "path": "THIRD_PARTY_LICENSES.txt",
+      "sha256": "0293d57f8d75e8f15140b2e5880459f6994b52bc7882d4694e9994474989e782",
+      "size": 409112
+    },
+    {
+      "mode": "100644",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "a79e93d42863f2138f8fddc76e59728f439255cc16081925ffad32501e808903",
+      "size": 24150
+    },
+    {
+      "mode": "100644",
+      "path": "docs/PUBLIC_RELEASE.md",
+      "sha256": "c1345bae83dc8013ef51595bdf6ba8d26fc9546aae4e9dabc9cfea532d6b4db7",
+      "size": 7857
+    },
+    {
+      "mode": "100644",
+      "path": "pyproject.toml",
+      "sha256": "0142c2ce19d54c515be8366c60c8337a67d3b925b0a3a369ca9a259d5147c3ae",
+      "size": 2860
+    },
+    {
+      "mode": "100644",
+      "path": "release/public_export_policy.json",
+      "sha256": "748d39e34f5e70afcf7dd2a5dceb87773fabd39854e329cd71e6eeb89d3f73f4",
+      "size": 6008
+    },
+    {
+      "mode": "100644",
+      "path": "rust-toolchain.toml",
+      "sha256": "174a086284d57e79557b62bc627e96257893375dfd37239e3c3e830ce2629b95",
+      "size": 86
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/Cargo.lock",
+      "sha256": "64abf24bb884fdf8b45206138dc2227389cffbeb0e51012026de143a87ee1ef8",
+      "size": 45466
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/Cargo.toml",
+      "sha256": "2122972663ca4b027185fb88f67c33c042b27e93bf38e8a26c7abe6faff48a61",
+      "size": 1818
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/README.md",
+      "sha256": "c3806bfbddc46461ec9eb320f4fa4465886ca2d6296a1ba9727c806dfa3efc73",
+      "size": 1252
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/cpu_config.rs",
+      "sha256": "22e37d87cd01b3f82f224834101e8bbace8c8778bc9c120b25dd312071db4a6c",
+      "size": 43606
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/features.rs",
+      "sha256": "3928285ef260a8c5a8890f64a9802495666325b4a25e805f3cba61b34a3ac8e8",
+      "size": 6425
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/gpu.rs",
+      "sha256": "069a5427412314d0994c76fb2b62ee6a176de9e451043d12db91949ab4ff68cd",
+      "size": 20499
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/id_encoding.rs",
+      "sha256": "61ca8d9aa7f25a6f6e86760710bf5031e1c6109aa7b6dac9c4ac9171497b6e8f",
+      "size": 6903
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/lib.rs",
+      "sha256": "3f7653f8d251bba5b4537b2ebc7de7d9513f728a62a462ac72572c5013256753",
+      "size": 4261
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model.rs",
+      "sha256": "a32d2fe880cbbf77378f903fafb5253943e75f7b8e5aedf2a483b6902eb5940a",
+      "size": 112681
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/bindings.rs",
+      "sha256": "afc2b18df135813f27180a95d152b6c781585ac3333a4f5bd930737724509f2b",
+      "size": 120636
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/bulk.rs",
+      "sha256": "36ae2a8f0126658625caa22e0fe2c7dfd41d6409d91008b32d4e6189738aa4b6",
+      "size": 139640
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/channel_mixer.rs",
+      "sha256": "e609292e2edf8598892b97a29f170e069c945edb5aeab1813f1adc5b66213159",
+      "size": 51798
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/checkpoint_bin.rs",
+      "sha256": "bdf47f3c351329fbece58ffd7eb01dc7045b742d908412ec409cb9ff10803a4c",
+      "size": 95435
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu.rs",
+      "sha256": "332772b33106f5a9459999863a06774fe3faa1079f852d507d490050406bbd15",
+      "size": 106813
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_predict.wgsl",
+      "sha256": "e5b3aec4560d147dd7f639dd56530eaa3ff306f51c6648f5ffbdea872fa3fbeb",
+      "size": 24887
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_predict_shared_rows.wgsl",
+      "sha256": "0929508a3f37017758ccb2cb9cd45bfc543284e01d039ea7528b837cf8a325da",
+      "size": 27051
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_arena.wgsl",
+      "sha256": "a89095c241887348a4473caac44bafa461f05600bcc2896bebdf78c9ed6c0df3",
+      "size": 1592
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_fused_projections.wgsl",
+      "sha256": "f298f94e2ffc16302bf7b587f3fb97cc5981dfb7a28b3f72f281cdb8c722379f",
+      "size": 27524
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_heads.wgsl",
+      "sha256": "5c60067c32787080ad25b7c38df94abdf9cdef31dd5242c43c25e3bd54a6caa1",
+      "size": 8892
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_scan.rs",
+      "sha256": "44b34cee9d2d997ad5fc4ff6ab51eaa7178f8ca6ba74bfe008d9ad8a6969063a",
+      "size": 210427
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_scan.wgsl",
+      "sha256": "eb2af352120e38d50e7d8026697711b908c95cf337a7244803f4c9f9a522f073",
+      "size": 35544
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_state.wgsl",
+      "sha256": "541853289b03e5f219584edc0479e90660d59caee207280405bf782261586fd4",
+      "size": 2126
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/gpu_process_topology.wgsl",
+      "sha256": "990105b3e92b98a49fcc4de7b2bc817d0d399d4dc53a7ba3f3bfa77d3de01165",
+      "size": 1278
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/linear.rs",
+      "sha256": "21d0fb11977743dc7ac27f44bafdb51cc610a1fa5e510d6add8daf017e53feef",
+      "size": 107420
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/live_session.rs",
+      "sha256": "fc171a9bf128322d32d4c02638b72df47656891ba49c98fcb2d83d63f737880e",
+      "size": 108170
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/output_heads.rs",
+      "sha256": "7dccce329819a37cc5471547a4c275b5908032a37668a24bd0db342d13b6b022",
+      "size": 23754
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/pipeline.rs",
+      "sha256": "d185fb37c6e34c53c5f435ce7ba9110e8cf125883d26041dcab5ea0a80e417b3",
+      "size": 29866
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/prediction_batch.rs",
+      "sha256": "076876c98168e04d630c956a06caac74397f539466f9054f2708e9ced4dce39a",
+      "size": 6471
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/process_payload.rs",
+      "sha256": "4c8a609e6577ecb10846478be96c285424b0e8ef6b2e421a9a19a74ba832edf3",
+      "size": 9088
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/review_batch.rs",
+      "sha256": "0b0e91183bd3caeb8a5c78f6ae909b07f671cac163f5a48bd8c661bee472690d",
+      "size": 10004
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/runtime.rs",
+      "sha256": "353e86d2de9a23eaf2b07a329265055e73a572b14b5c56ab34f49a6d73216d51",
+      "size": 73626
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/state.rs",
+      "sha256": "3aa4b7622edd8900991b8939ee747c29382e50ad375c867df13b9b85bdeec3a6",
+      "size": 20846
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/state_builder.rs",
+      "sha256": "6cc1f5f5a59f43cc18c6b4cdb62845988dc2f96ea701e0444fe0a363f7cb3607",
+      "size": 29923
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/time_mixer.rs",
+      "sha256": "026392f7b2cdead681c9e3abe68c8abfd52c889ffe3b3f8f482608ead7172d02",
+      "size": 242965
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/undo.rs",
+      "sha256": "306d0e3ff6f1836cbd2e2539aa401fee0dec65c7b0b7aa0a98d6e112c1422e59",
+      "size": 28313
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model/validation.rs",
+      "sha256": "056a7d9d4d0b9632a5f28b7cb0bdea2deaae10219dc610f5539653c3707716ff",
+      "size": 6722
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/model_weights.rs",
+      "sha256": "227e48bb956b3d9a586c7d1e1798a568079ef851e3b50546ec6ae6a497c9b804",
+      "size": 19528
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/ops.rs",
+      "sha256": "2c52b584bc5aa88127725b118b6be5d576a730be8692d3d1a1569f61e5294a3b",
+      "size": 204192
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/portable_simd.rs",
+      "sha256": "8786f57365aed7afcd1a69dbcd43c6ea7236fe999dbc0b788984572c09769db7",
+      "size": 25674
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/profile.rs",
+      "sha256": "195762778871ca1eb5b23664f1afb6dc53278244b6cd2ecad56673d0199654f6",
+      "size": 28236
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/py_state.rs",
+      "sha256": "bbeed11b36711c8ef5580b57cb21611c754e456c7704448d32248eb828551968",
+      "size": 31288
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/state.rs",
+      "sha256": "1461b4bf621fb0ca16dd4faba54a33f7d21b702b4332fda6cf8966cc4f7d1073",
+      "size": 43170
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/tensor_io.rs",
+      "sha256": "01345aefc65814f200661361430cebb20823004d5259f7357c0013364f7e9ff1",
+      "size": 5931
+    },
+    {
+      "mode": "100644",
+      "path": "rust/rwkv-srs-cpu/src/weights.rs",
+      "sha256": "b53e72e93b79b9b665270f83c8748e4bab68bee0cfaa8ce46d5c73e22b58ba4e",
+      "size": 22361
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/build_local_artifact.py",
+      "sha256": "a4466e6e1ae8d2db8c5fcb19d15c53296992626a7ff142cee0babe2504cb20ae",
+      "size": 11068
+    },
+    {
+      "mode": "100755",
+      "path": "scripts/build_rust_ci_wheel.sh",
+      "sha256": "0b7cd6dcea5d16946ccf33798ba6f1e261efffb93c61d0c31463b8601a17b22d",
+      "size": 2816
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/generate_third_party_notices.py",
+      "sha256": "499c3e34a581ed12628d127e38794fb2bfe970cc47ea01f17ddb2b2acac1a3b6",
+      "size": 13125
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/public_release_export.py",
+      "sha256": "d2e2fa4543d8a7fd91d58861070943288863eaf883b8ed8bb6a513db94691914",
+      "size": 12177
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/release_manifest.py",
+      "sha256": "e5e29f3d36208598fc90ce8c945e9c63d0cae9f5cb130bd838c82a10c572112f",
+      "size": 22779
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/rust_wheel_contract.py",
+      "sha256": "7996758b951f7a8a0d6c7264640686b5bf5c184607cfe6f49a14d55217ac8400",
+      "size": 12292
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/validate_public_release.py",
+      "sha256": "9d9bf3b3708642632e27ff9876aa216beae386a1d54ee85f40dcfe4fd9688a31",
+      "size": 22685
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/__init__.py",
+      "sha256": "c7e17f7976ff464d28860c1ac0fef3761ebb15dd01ccde0bcfc9d43b08c82a0b",
+      "size": 3620
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/_api_core.py",
+      "sha256": "8afdde369717bf88a2396140c2e57212f4fa4caf0cace88da08dfb56f962ad8b",
+      "size": 20476
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/_backend.py",
+      "sha256": "d55a8403412d114686d72c8c325f0c811685bf5bbc9272dc37ee6e1206fb368e",
+      "size": 681
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/_rust.py",
+      "sha256": "a16196f1697bab9a812eda6a2a5e012ba647befcec0809f9de3f3bcd3e169e7e",
+      "size": 298
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/backends/__init__.py",
+      "sha256": "7045b30ab233d7f112312bac7c8ad195320e3ca1ac1716884ae605e06bcfb4c5",
+      "size": 68
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/backends/rust.py",
+      "sha256": "64ed744f44c0f0c17e98d2567cef8a03f337a0a5118646bb0b821840c3620ee9",
+      "size": 178236
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/live.py",
+      "sha256": "da5ebadbbb3666e985ff831ecbcce0fed55c103696a71889d4f80e8f6ee435af",
+      "size": 43809
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/prediction_batch.py",
+      "sha256": "36ada959856935ca36192881f1a77278b4612d9df542b27e8f9a94c3c1ede7e3",
+      "size": 3469
+    },
+    {
+      "mode": "100644",
+      "path": "src/rwkv_srs/review_batch.py",
+      "sha256": "b8e493d92e51ccfe008d57d95232f00ee7bef71db5f88209b61d9bc42b859018",
+      "size": 4108
+    },
+    {
+      "mode": "100644",
+      "path": "tests/__init__.py",
+      "sha256": "91122cfcba88a1408684751911601e77d5e1d0edba107d356c58327a06dc1905",
+      "size": 219
+    },
+    {
+      "mode": "100644",
+      "path": "tests/fixtures/models/PROVENANCE.md",
+      "sha256": "d4c7667347df803ddf6509ee6573e380325787774f9be0aae38a2fbba284cae1",
+      "size": 1345
+    },
+    {
+      "mode": "100644",
+      "path": "tests/fixtures/models/RWKV_trained_on_101_4999.safetensors",
+      "sha256": "fa35cd87ee3589ad7457d54f844c90cb94d19d56e5104df04aa5fb0dcf28c4e9",
+      "size": 11112152
+    },
+    {
+      "mode": "100644",
+      "path": "tests/fixtures/models/RWKV_trained_on_5000_10000.safetensors",
+      "sha256": "0b1566d8159464fc512c8cb49525aefd3f84c9baaacdf0ea2e8d7a398729d91a",
+      "size": 11112160
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/README.md",
+      "sha256": "964dec8a64bfbf9f285882bc6673dbea72f7e34a6b59495e112fe9f876d1c59f",
+      "size": 2270
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/__init__.py",
+      "sha256": "558e21f190f6b19ec7bf8c44d4ffe51b7ab36678cb060de1f32778643513907a",
+      "size": 66
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/conftest.py",
+      "sha256": "f14adb3bebd4b2d88e066c8fc0af10b0229c5c9d029671dbb1d5eba178d7dc80",
+      "size": 948
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/fixtures/PROVENANCE.json",
+      "sha256": "cc1905e1a22e6bd71f8451d28eccbb291dec33ea060f14cb5e12a83b1c35dd93",
+      "size": 1148
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/fixtures/PROVENANCE.md",
+      "sha256": "92fa84c26d72344d775b7dd00b8d4ab7c0be124ff39c96612593d5b45c0dff18",
+      "size": 817
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/fixtures/expected_outputs.json",
+      "sha256": "e1f91a76546dfdcd8610893e2989505c4e0f393e68dfec902e345c158ece206a",
+      "size": 1683
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/fixtures/reviews.json",
+      "sha256": "fa2f10b2772caba303044a3a85a955c5d80aac5575ae15c78b4cb42d5416aa40",
+      "size": 2800
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/model_fixture.py",
+      "sha256": "bd6b4e984ad6f5506bcfbefae92c7fa477845c530f1cbc54ab9fa73b65290d4c",
+      "size": 8040
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/runtime_probe.py",
+      "sha256": "8ea7f8b6897952e217d620490da71894c1c995947b858c4f787845c843df2c53",
+      "size": 1921
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/test_execution_modes.py",
+      "sha256": "d1b4469b6d31383c885b811c0a209bcfa3470e511881fe91bd1bd1b0cc33eab9",
+      "size": 2785
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/test_import_contract.py",
+      "sha256": "21283e4f5ba68d58b6b7d60aa8883582e7908575190f30daf46b37f2161e5d10",
+      "size": 3649
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/test_model_distribution.py",
+      "sha256": "bd8fbf62b04d9aa8fa1404b7b23720891dcafaf1a3c573974109f12ab07beb63",
+      "size": 995
+    },
+    {
+      "mode": "100644",
+      "path": "tests/release/test_runtime_contract.py",
+      "sha256": "c537a5c2cb22b69a4b96b11b26c07fa8006843312e9c4957917784c3aec80c51",
+      "size": 6038
+    }
+  ],
+  "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
+  "schema_version": 1,
+  "source_commit": "ac797395ba2074a043c25a7b74c5cf8e1db27d6b",
+  "source_file_count": 87,
+  "source_files_sha256": "3419002912243e8f6c2e69c7931f6cbab4fc7c42a88f51cbd9946135441a8906",
+  "source_repository": "rwkv-srs"
+}

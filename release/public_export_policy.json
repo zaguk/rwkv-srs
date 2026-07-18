@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "policy_id": "rwkv-srs-rust-python-public",
+  "policy_version": 4,
+  "source_repository": "rwkv-srs",
+  "tracked_paths_sha256": "6103db2b2b263c3064b5b2904faa18aa30c5fe3c8c446afb7aba5722b773d4d9",
+  "rules": [
+    {
+      "id": "public-root-build",
+      "action": "include",
+      "paths": [
+        ".gitattributes",
+        ".gitignore",
+        "README.md",
+        "THIRD_PARTY_LICENSES.txt",
+        "THIRD_PARTY_NOTICES.md",
+        "rust-toolchain.toml",
+        "pyproject.toml"
+      ]
+    },
+    {
+      "id": "public-ci",
+      "action": "include",
+      "paths": [
+        ".github/workflows/public-release.yml"
+      ]
+    },
+    {
+      "id": "public-documentation",
+      "action": "include",
+      "paths": [
+        "docs/PUBLIC_RELEASE.md"
+      ]
+    },
+    {
+      "id": "public-export-policy",
+      "action": "include",
+      "paths": [
+        "release/public_export_policy.json"
+      ]
+    },
+    {
+      "id": "public-native-runtime",
+      "action": "include",
+      "prefixes": [
+        "rust/rwkv-srs-cpu/"
+      ]
+    },
+    {
+      "id": "public-python-runtime",
+      "action": "include",
+      "paths": [
+        "src/rwkv_srs/__init__.py",
+        "src/rwkv_srs/_api_core.py",
+        "src/rwkv_srs/_backend.py",
+        "src/rwkv_srs/_rust.py",
+        "src/rwkv_srs/backends/__init__.py",
+        "src/rwkv_srs/backends/rust.py",
+        "src/rwkv_srs/live.py",
+        "src/rwkv_srs/prediction_batch.py",
+        "src/rwkv_srs/review_batch.py"
+      ]
+    },
+    {
+      "id": "public-release-tools",
+      "action": "include",
+      "paths": [
+        "scripts/build_local_artifact.py",
+        "scripts/build_rust_ci_wheel.sh",
+        "scripts/generate_third_party_notices.py",
+        "scripts/public_release_export.py",
+        "scripts/release_manifest.py",
+        "scripts/rust_wheel_contract.py",
+        "scripts/validate_public_release.py"
+      ]
+    },
+    {
+      "id": "public-release-tests",
+      "action": "include",
+      "paths": [
+        "tests/__init__.py"
+      ],
+      "prefixes": [
+        "tests/release/"
+      ]
+    },
+    {
+      "id": "public-repository-models",
+      "action": "include",
+      "paths": [
+        "tests/fixtures/models/PROVENANCE.md",
+        "tests/fixtures/models/RWKV_trained_on_101_4999.safetensors",
+        "tests/fixtures/models/RWKV_trained_on_5000_10000.safetensors"
+      ]
+    },
+    {
+      "id": "internal-root-files",
+      "action": "exclude",
+      "paths": [
+        "AGENTS.md",
+        "HANDOFF.md",
+        "MANIFEST.in",
+        "PREDICT_MANY_LIGHTNING_INSTRUCTION_DOC.md",
+        "requirements.txt"
+      ]
+    },
+    {
+      "id": "internal-ci",
+      "action": "exclude",
+      "paths": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "id": "internal-benchmarks",
+      "action": "exclude",
+      "prefixes": [
+        "benches/"
+      ]
+    },
+    {
+      "id": "internal-documentation",
+      "action": "exclude",
+      "paths": [
+        "docs/ANKI_ADDON_INTEGRATION.md",
+        "docs/ARTIFACT_POLICY.md",
+        "docs/BF16_LOW_MEMORY_EXPERIMENT.md",
+        "docs/BUILD_AND_TEST.md",
+        "docs/CHECKPOINTS.md",
+        "docs/CPU_FAST_PATH_PORTABILITY.md",
+        "docs/CPU_REPLAY_AND_PROCESS_MANY_EXPERIMENT_PLAN.md",
+        "docs/GPU_PREDICT_MANY.md",
+        "docs/GPU_PREDICT_MANY_EXPERIMENTS.md",
+        "docs/GPU_PROCESS_MANY_BENCHMARK.md",
+        "docs/JSCHOREELS_RWKV_PROCESS_SPEEDUP_IMPLEMENTATION_PLAN.md",
+        "docs/LIVE_PREDICTION_SESSION.md",
+        "docs/MAINTAINABILITY.md",
+        "docs/PORTABLE_SIMD_EXPERIMENTS.md",
+        "docs/POTENTIAL_BOTTLENECKS.md",
+        "docs/POTENTIAL_IMPROVEMENTS.md",
+        "docs/PREDICTION_BATCH.md",
+        "docs/PREDICT_MANY_LIGHTNING_EXPERIMENTS.md",
+        "docs/PREDICT_MANY_PERFORMANCE_ENHANCEMENTS.md",
+        "docs/PROJECTS.md",
+        "docs/PUBLIC_GITHUB_RELEASE_PLAN.md",
+        "docs/REVIEW_BATCH.md",
+        "docs/RUST_ABI3_BUILD.md",
+        "docs/RUST_BUILD_PROFILES.md",
+        "docs/RUST_CHECKPOINT_STORAGE_IMPLEMENTATION_PLAN.md",
+        "docs/RWKV_P_REFERENCE_METRICS_PLAN.md",
+        "docs/SIMD_PERFORMANCE_INVESTIGATION_PLAN.md",
+        "docs/SMOKE_AND_BENCHMARKS.md",
+        "docs/SUMMARY.md"
+      ]
+    },
+    {
+      "id": "internal-metrics-package",
+      "action": "exclude",
+      "prefixes": [
+        "packages/"
+      ]
+    },
+    {
+      "id": "internal-build-and-profile-tools",
+      "action": "exclude",
+      "paths": [
+        "scripts/bootstrap_agent_rust_context.sh",
+        "scripts/build_addon_vendor.py",
+        "scripts/build_rust_local_extension.sh",
+        "scripts/build_rust_pgo_wheel.py",
+        "scripts/build_rust_release_extension.sh",
+        "scripts/convert_rwkv_srs_weights.py",
+        "scripts/manual_source_export.py",
+        "scripts/prepare_srs_benchmark_checkout.py",
+        "scripts/profile_rust_predict.py",
+        "scripts/profile_rust_process.py"
+      ]
+    },
+    {
+      "id": "internal-torch-oracle-source",
+      "action": "exclude",
+      "paths": [
+        "src/rwkv_srs/_state.py",
+        "src/rwkv_srs/_torch_checkpoint.py",
+        "src/rwkv_srs/api.py",
+        "src/rwkv_srs/architecture.py",
+        "src/rwkv_srs/backends/torch.py",
+        "src/rwkv_srs/config.py",
+        "src/rwkv_srs/cpu_inference.py",
+        "src/rwkv_srs/data_processing.py"
+      ],
+      "prefixes": [
+        "src/rwkv_srs/model/"
+      ]
+    },
+    {
+      "id": "internal-test-suite",
+      "action": "exclude",
+      "paths": [
+        "tests/README.md",
+        "tests/conftest.py",
+        "tests/paths.py",
+        "tests/fixtures/models/RWKV_trained_on_101_4999.pth",
+        "tests/fixtures/models/RWKV_trained_on_5000_10000.pth"
+      ],
+      "prefixes": [
+        "tests/fixtures/data/",
+        "tests/fixtures/reference/",
+        "tests/integration/",
+        "tests/parity/",
+        "tests/rust/",
+        "tests/smoke/",
+        "tests/tools/",
+        "tests/torch/"
+      ]
+    }
+  ]
+}

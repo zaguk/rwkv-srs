@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "seed": 1729,
+  "initial_target_timestamp_seconds": 1700000000.0,
+  "initial_target_day_offset": 120.0,
+  "process_rows": [
+    {"review_id": 1, "card_id": 101, "note_id": 1001, "deck_id": 10, "preset_id": 20, "day_offset": 100.0, "elapsed_days": -1.0, "elapsed_seconds": -1.0, "rating": 3, "duration": 4.5, "state": 0},
+    {"review_id": 2, "card_id": 102, "note_id": 1002, "deck_id": 10, "preset_id": 20, "day_offset": 100.0, "elapsed_days": -1.0, "elapsed_seconds": -1.0, "rating": 2, "duration": 7.0, "state": 0},
+    {"review_id": 3, "card_id": 101, "note_id": 1001, "deck_id": 10, "preset_id": 20, "day_offset": 101.0, "elapsed_days": 1.0, "elapsed_seconds": 86400.0, "rating": 2, "duration": 6.0, "state": 1},
+    {"review_id": 4, "card_id": 103, "note_id": 1001, "deck_id": 11, "preset_id": 21, "day_offset": 101.5, "elapsed_days": -1.0, "elapsed_seconds": -1.0, "rating": 4, "duration": 3.0, "state": 0},
+    {"review_id": 5, "card_id": 102, "note_id": 1002, "deck_id": 10, "preset_id": 20, "day_offset": 103.0, "elapsed_days": 3.0, "elapsed_seconds": 259200.0, "rating": 3, "duration": 5.5, "state": 2},
+    {"review_id": 6, "card_id": 101, "note_id": 1001, "deck_id": 10, "preset_id": 20, "day_offset": 108.0, "elapsed_days": 7.0, "elapsed_seconds": 604800.0, "rating": 3, "duration": 4.0, "state": 2},
+    {"review_id": 7, "card_id": 104, "note_id": null, "deck_id": null, "preset_id": null, "day_offset": 109.0, "elapsed_days": -1.0, "elapsed_seconds": -1.0, "rating": 1, "duration": 9.0, "state": 0},
+    {"review_id": 8, "card_id": 104, "note_id": null, "deck_id": null, "preset_id": null, "day_offset": 110.5, "elapsed_days": 1.5, "elapsed_seconds": 129600.0, "rating": 2, "duration": 8.0, "state": 1}
+  ],
+  "prediction_rows": [
+    {"review_id": 101, "card_id": 101, "note_id": 1001, "deck_id": 10, "preset_id": 20, "day_offset": 120.0, "elapsed_days": 12.0, "elapsed_seconds": 1036800.0},
+    {"review_id": 102, "card_id": 102, "note_id": 1002, "deck_id": 10, "preset_id": 20, "day_offset": 120.0, "elapsed_days": 17.0, "elapsed_seconds": 1468800.0},
+    {"review_id": 103, "card_id": 103, "note_id": 1001, "deck_id": 11, "preset_id": 21, "day_offset": 120.0, "elapsed_days": 18.5, "elapsed_seconds": 1598400.0},
+    {"review_id": 104, "card_id": 104, "note_id": null, "deck_id": null, "preset_id": null, "day_offset": 120.0, "elapsed_days": 9.5, "elapsed_seconds": 820800.0},
+    {"review_id": 105, "card_id": 105, "note_id": 1005, "deck_id": 12, "preset_id": 22, "day_offset": 120.0, "elapsed_days": -1.0, "elapsed_seconds": -1.0}
+  ],
+  "live_answer": {"review_id": 9, "card_id": 101, "note_id": 1001, "deck_id": 10, "preset_id": 20, "day_offset": 120.0, "elapsed_days": 12.0, "elapsed_seconds": 1036800.0, "rating": 4, "duration": 3.5, "state": 2}
+}

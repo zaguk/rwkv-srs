@@ -1,0 +1,175 @@
+name: Public release contract
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-release-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+
+env:
+  CARGO_TERM_COLOR: always
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+jobs:
+  artifacts:
+    name: ${{ matrix.target }} / Python 3.11 + 3.14
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux-x86_64
+            runner: ubuntu-24.04
+            python_arch: x64
+            kind: both
+            build_tools: "maturin[zig]>=1.9,<2"
+          - target: linux-aarch64
+            runner: ubuntu-24.04-arm
+            python_arch: arm64
+            kind: wheel
+            build_tools: "maturin[zig]>=1.9,<2"
+          - target: macos-x86_64
+            runner: macos-15-intel
+            python_arch: x64
+            kind: wheel
+            build_tools: "maturin>=1.9,<2"
+          - target: macos-aarch64
+            runner: macos-15
+            python_arch: arm64
+            kind: wheel
+            build_tools: "maturin>=1.9,<2"
+          - target: windows-x86_64
+            runner: windows-2022
+            python_arch: x64
+            kind: wheel
+            build_tools: "maturin>=1.9,<2"
+          - target: windows-aarch64
+            runner: windows-11-arm
+            python_arch: arm64
+            kind: wheel
+            build_tools: "maturin>=1.9,<2"
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Check out exact source revision
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      # Set up newest first so the minimum interpreter remains the default
+      # `python` used for the one wheel build. Both interpreter paths are passed
+      # to the validator, which installs and tests the exact same abi3 wheel.
+      - name: Set up newest supported Python
+        id: newest-python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          architecture: ${{ matrix.python_arch }}
+
+      - name: Set up minimum supported Python
+        id: minimum-python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          architecture: ${{ matrix.python_arch }}
+
+      - name: Set up pinned release Rust
+        uses: dtolnay/rust-toolchain@1.97.0
+
+      - name: Install public build tools
+        run: python -m pip install "${{ matrix.build_tools }}"
+
+      - name: Build once, install twice, and validate
+        run: >-
+          python scripts/validate_public_release.py
+          --artifact-kind ${{ matrix.kind }}
+          --build-python "${{ steps.minimum-python.outputs.python-path }}"
+          --test-python "${{ steps.minimum-python.outputs.python-path }}"
+          --test-python "${{ steps.newest-python.outputs.python-path }}"
+          --sdist-test-python "${{ steps.minimum-python.outputs.python-path }}"
+          --expected-target ${{ matrix.target }}
+          --work-dir "${{ runner.temp }}/rwkv-srs-release-work"
+          --output-dir "${{ runner.temp }}/rwkv-srs-release-assets"
+          --source-commit "${{ github.sha }}"
+          --source-ref "${{ github.ref }}"
+
+      - name: Upload the exact tested wheel and manifests
+        uses: actions/upload-artifact@v4
+        with:
+          name: tested-wheel-${{ matrix.target }}
+          path: ${{ runner.temp }}/rwkv-srs-release-assets/*
+          if-no-files-found: error
+          retention-days: 14
+
+  msrv:
+    name: Rust 1.87 MSRV
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up minimum supported Rust
+        uses: dtolnay/rust-toolchain@1.87.0
+      - name: Set up Python for PyO3 discovery
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: Check all native targets at the declared MSRV
+        run: >-
+          cargo check --locked --all-targets
+          --manifest-path rust/rwkv-srs-cpu/Cargo.toml
+
+  github-release:
+    name: Publish exact tested wheels
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [artifacts, msrv]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up manifest Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Download all tested target artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: tested-wheel-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Verify six-wheel matrix and assemble release manifests
+        run: >-
+          python scripts/release_manifest.py assemble
+          --artifact-dir release-assets
+          --release-tag "${{ github.ref_name }}"
+          --expected-source-commit "${{ github.sha }}"
+
+      - name: Publish wheels and manifests to GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            release-assets/*.whl \
+            release-assets/*.provenance.json \
+            release-assets/*.sha256 \
+            release-assets/SHA256SUMS \
+            release-assets/RELEASE_PROVENANCE.json \
+            --verify-tag \
+            --generate-notes \
+            --title "RWKV-SRS $GITHUB_REF_NAME"

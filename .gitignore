@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Rust
+target/
+rust/**/target/
+
+# Native build outputs
+*.so
+*.pyd
+*.dll
+*.dylib
+*.dylib.dSYM/
+
+# Local/generated caches and datasets
+cache/
+.cache/
+artifacts/
+anki-revlogs-10k/
+.agent/
+.agents/
+.codex/
+
+# Large/generated checkpoints
+*.pth
+*.checkpoint.bin
+*.bin
+
+# Generated docs/build artifacts
+rust/**/target/doc/
+
+# Allowed committed test fixtures
+!tests/fixtures/**/*.pt
+!tests/fixtures/**/*.pt.gz
+!tests/fixtures/models/*.pth
+!tests/fixtures/**/*.json
+!tests/fixtures/**/*.jsonl
+!tests/fixtures/**/*.tsv.gz
+!tests/fixtures/**/*.parquet
+!tests/fixtures/**/*.safetensors
+
+# Generated benchmark fixtures are intentionally rebuildable and can be large.
+tests/fixtures/data/smoke/extended/

@@ -1,0 +1,102 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "rwkv-srs"
+version = "0.1.0"
+description = "Rust-backed RWKV-SRS inference runtime"
+readme = "README.md"
+requires-python = ">=3.11"
+keywords = ["spaced-repetition", "rwkv", "inference", "rust"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Rust",
+]
+license-files = ["THIRD_PARTY_NOTICES.md", "THIRD_PARTY_LICENSES.txt"]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/zaguk/rwkv-srs"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy==2.1.0",
+    "maturin[zig]>=1.9,<2",
+    "numpy~=2.3.5",
+    "pandas~=2.3.3",
+    "pyarrow~=22.0.0",
+]
+test = [
+    "pytest",
+    "numpy~=2.3.5",
+    "pandas~=2.3.3",
+    "pyarrow~=22.0.0",
+]
+tools = [
+    "safetensors~=0.7.0",
+]
+rust-build = [
+    "maturin[zig]>=1.9,<2",
+]
+
+[tool.maturin]
+manifest-path = "rust/rwkv-srs-cpu/Cargo.toml"
+python-source = "src"
+module-name = "rwkv_srs._native"
+features = ["extension-module"]
+include = [
+    { path = "rust-toolchain.toml", format = "sdist" },
+    { path = "scripts/build_local_artifact.py", format = "sdist" },
+    { path = "scripts/generate_third_party_notices.py", format = "sdist" },
+    { path = "scripts/release_manifest.py", format = "sdist" },
+    { path = "tests/__init__.py", format = "sdist" },
+    { path = "tests/release/*.py", format = "sdist" },
+    { path = "tests/release/*.md", format = "sdist" },
+    { path = "tests/release/fixtures/*.json", format = "sdist" },
+    { path = "tests/release/fixtures/*.md", format = "sdist" },
+]
+exclude = [
+    "src/rwkv_srs/_state.py",
+    "src/rwkv_srs/_torch_checkpoint.py",
+    "src/rwkv_srs/api.py",
+    "src/rwkv_srs/architecture.py",
+    "src/rwkv_srs/config.py",
+    "src/rwkv_srs/cpu_inference.py",
+    "src/rwkv_srs/data_processing.py",
+    "src/rwkv_srs/backends/torch.py",
+    "src/rwkv_srs/model/**",
+]
+
+[tool.mypy]
+python_version = "3.11"
+files = [
+    "src/rwkv_srs/_api_core.py",
+    "src/rwkv_srs/backends/rust.py",
+    "src/rwkv_srs/backends/torch.py",
+]
+check_untyped_defs = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "rust: Rust backend tests",
+    "torch: Torch backend tests",
+    "parity: cross-backend parity tests",
+    "integration: integration tests",
+    "smoke: smoke tests",
+    "slow: slow tests",
+    "extra_slow: tests that are too long for normal slow-suite runs",
+    "benchmark: benchmark tests",
+    "requires_native: requires the Rust native extension",
+]

@@ -1,0 +1,61 @@
+[package]
+name = "rwkv-srs-cpu-rs"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.87"
+description = "Native Rust/PyO3 runtime for RWKV-SRS inference"
+readme = "README.md"
+repository = "https://github.com/zaguk/rwkv-srs"
+publish = false
+
+[lib]
+name = "_native"
+crate-type = ["cdylib", "rlib"]
+
+[package.metadata.maturin]
+python-source = "../../src"
+module-name = "rwkv_srs._native"
+
+[features]
+# Standalone Cargo tests need normal Python linking. Maturin and the local
+# extension scripts opt into extension-module when building an importable cdylib.
+default = []
+extension-module = ["pyo3/extension-module"]
+
+[dependencies]
+anyhow = "1"
+thiserror = "1"
+pyo3 = { version = "0.22", features = ["abi3-py39"] }
+candle-core = "0.9"
+candle-nn = "0.9"
+safetensors = "0.7"
+rayon = "1.7"
+num_cpus = "1"
+bytemuck = { version = "1.24", features = ["derive"] }
+pulp = { version = "=0.22.2", default-features = false, features = ["std", "x86-v3"] }
+half = { version = "2.7", features = ["bytemuck"] }
+sha2 = "0.10"
+pollster = "1.0"
+wgpu = { version = "30", default-features = false, features = ["std", "parking_lot", "dx12", "metal", "vulkan", "vulkan-portability", "wgsl"] }
+
+[profile.release-development]
+inherits = "release"
+# Default profile for local iteration. This keeps the release-style optimization
+# level we have used so far, without LTO or symbol stripping.
+debug = false
+strip = "debuginfo"
+
+[profile.release-ci]
+inherits = "release"
+# Optimized, portable release profile for multiplatform wheels and addon assets.
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+
+[profile.release-local]
+inherits = "release"
+# Optimized source-build profile for a local machine. Use the wrapper script to
+# add `-C target-cpu=native`; Cargo profiles cannot encode that safely.
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

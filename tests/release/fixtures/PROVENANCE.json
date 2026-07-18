@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "origin": "Project-authored deterministic synthetic release fixtures",
+  "contains_external_data": false,
+  "contains_trained_parameters": false,
+  "redistribution_status": "Intended for redistribution with RWKV-SRS; final legal terms follow the project license selected before public release",
+  "files": {
+    "reviews.json": {
+      "sha256": "fa2f10b2772caba303044a3a85a955c5d80aac5575ae15c78b4cb42d5416aa40",
+      "origin": "Hand-written fictional review rows"
+    },
+    "expected_outputs.json": {
+      "sha256": "e1f91a76546dfdcd8610893e2989505c4e0f393e68dfec902e345c158ece206a",
+      "origin": "Frozen native API version 33 outputs for the deterministic synthetic model"
+    },
+    "../model_fixture.py": {
+      "sha256": "bd6b4e984ad6f5506bcfbefae92c7fa477845c530f1cbc54ab9fa73b65290d4c",
+      "origin": "Independent standard-library Safetensors schema and value generator"
+    }
+  },
+  "generated_model": {
+    "stored_in_repository": false,
+    "dtype": "F32",
+    "tensor_count": 504,
+    "parameter_count": 2762884,
+    "sha256": "06af8329c7193896b212d63f7409587cc85d70e94679f64099196e1ffbec4dfc"
+  }
+}
