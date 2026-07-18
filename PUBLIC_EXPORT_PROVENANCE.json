@@ -18,8 +18,8 @@
     {
       "mode": "100644",
       "path": ".gitattributes",
-      "sha256": "34d3dcbe51b722449c9d3fa8ec33018ef7f283908834253cf6d367c1a255fd45",
-      "size": 286
+      "sha256": "2014b2b1d1433e1f5d65b0df6803ff09744f76396e5e5e5d5557e1ff18c2229d",
+      "size": 371
     },
     {
       "mode": "100644",
@@ -618,8 +618,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "d090af13c37b0c7d780f0284f5e7b366572bb896",
+  "source_commit": "889f286ce20a50a5dc9f3cc959c8ea748942627c",
   "source_file_count": 100,
-  "source_files_sha256": "e94a76c588377856f7a87244dd6b650c91e22349b782254fe28f243ee0003104",
+  "source_files_sha256": "0a6279a1e52cb10ed822aedf79f7e737b1f5d82f36f1a6682da5b9fe1e10ad9b",
   "source_repository": "rwkv-srs"
 }

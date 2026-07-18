@@ -5,3 +5,5 @@ THIRD_PARTY_LICENSES.txt binary
 THIRD_PARTY_NOTICES.md text eol=lf
 rust/rwkv-srs-cpu/Cargo.lock text eol=lf
 rust/rwkv-srs-cpu/vendor/** text eol=lf
+tests/release/fixtures/*.json text eol=lf
+tests/release/model_fixture.py text eol=lf
