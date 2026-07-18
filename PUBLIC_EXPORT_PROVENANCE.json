@@ -24,8 +24,8 @@
     {
       "mode": "100644",
       "path": ".github/workflows/public-release.yml",
-      "sha256": "03ae7ddfd485cda6461a868901bb5b687f916db2c8562e310a9f3a4c9c5f6c77",
-      "size": 5634
+      "sha256": "8ec3915f34590d7172f301d76e58607c18c201878c7125fa356c3afd49f09348",
+      "size": 6088
     },
     {
       "mode": "100644",
@@ -540,8 +540,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "4395472b2c4f149e4a89b2b3a7fbbbbcef78d440",
+  "source_commit": "4c4dab5164ae5e0b3f7b0714c1c4f8ded070ab54",
   "source_file_count": 87,
-  "source_files_sha256": "f8e8c76c2cc16371c831ca54dd609e81dab17555e136f8d7630a9ffcfbf43c70",
+  "source_files_sha256": "e772b8d05bb260656347ec39cde8c705187304284085d4537e3d1b92a776e2a0",
   "source_repository": "rwkv-srs"
 }

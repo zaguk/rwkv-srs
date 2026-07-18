@@ -20,6 +20,11 @@ jobs:
   artifacts:
     name: ${{ matrix.target }} / Python 3.11 + 3.14
     timeout-minutes: 120
+    env:
+      # The checked-in toolchain also requests developer-only components.
+      # Select the action-installed compiler explicitly so rustup does not
+      # attempt a second component installation on hosted runners.
+      RUSTUP_TOOLCHAIN: "1.97.0"
     strategy:
       fail-fast: false
       matrix:
@@ -110,6 +115,10 @@ jobs:
     name: Rust 1.87 MSRV
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    env:
+      # Directory toolchain files outrank rustup's default toolchain. Pin the
+      # actual compiler used by this job instead of merely installing 1.87.
+      RUSTUP_TOOLCHAIN: "1.87.0"
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
