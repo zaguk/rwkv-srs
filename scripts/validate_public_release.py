@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import deque
 import hashlib
 import os
 from pathlib import Path
@@ -77,8 +78,44 @@ def _run(
     cwd: Path,
     env: dict[str, str] | None = None,
 ) -> None:
-    print("+", " ".join(command), flush=True)
-    subprocess.run(command, cwd=cwd, env=env, check=True)
+    display = " ".join(command)
+    print("+", display, flush=True)
+    tail: deque[str] = deque(maxlen=30)
+    process = subprocess.Popen(
+        command,
+        cwd=cwd,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        errors="replace",
+        bufsize=1,
+    )
+    assert process.stdout is not None
+    for line in process.stdout:
+        print(line, end="", flush=True)
+        tail.append(line.rstrip())
+    returncode = process.wait()
+    if returncode:
+        detail = "\n".join(tail)
+        if len(detail) > 8_000:
+            detail = detail[-8_000:]
+        message = f"command failed with exit code {returncode}: {display}"
+        if detail:
+            message += f"\nLast output:\n{detail}"
+        raise RuntimeError(message)
+
+
+def _emit_github_error(error: BaseException) -> None:
+    if os.environ.get("GITHUB_ACTIONS", "").lower() != "true":
+        return
+    message = str(error) or type(error).__name__
+    escaped = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    print(
+        f"::error title=Public release validation failed::{escaped}",
+        file=sys.stderr,
+        flush=True,
+    )
 
 
 def _venv_python(venv: Path) -> Path:
@@ -738,4 +775,8 @@ def _validate(
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BaseException as error:
+        _emit_github_error(error)
+        raise

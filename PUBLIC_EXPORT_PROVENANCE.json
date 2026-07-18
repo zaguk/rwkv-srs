@@ -378,8 +378,8 @@
     {
       "mode": "100644",
       "path": "scripts/validate_public_release.py",
-      "sha256": "9d9bf3b3708642632e27ff9876aa216beae386a1d54ee85f40dcfe4fd9688a31",
-      "size": 22685
+      "sha256": "3cfe3f53638553171e096712036c88627b767bb4c87a227820408f2283e74c16",
+      "size": 23912
     },
     {
       "mode": "100644",
@@ -540,8 +540,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "ac797395ba2074a043c25a7b74c5cf8e1db27d6b",
+  "source_commit": "4395472b2c4f149e4a89b2b3a7fbbbbcef78d440",
   "source_file_count": 87,
-  "source_files_sha256": "3419002912243e8f6c2e69c7931f6cbab4fc7c42a88f51cbd9946135441a8906",
+  "source_files_sha256": "f8e8c76c2cc16371c831ca54dd609e81dab17555e136f8d7630a9ffcfbf43c70",
   "source_repository": "rwkv-srs"
 }
