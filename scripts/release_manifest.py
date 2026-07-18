@@ -51,6 +51,16 @@ class ReleaseManifestError(ValueError):
     """Raised when release metadata does not match its wheel or source."""
 
 
+def _emit_github_error(error: BaseException) -> None:
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    detail = str(error).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    print(
+        f"::error title=Release manifest validation failed::{detail}",
+        file=sys.stderr,
+    )
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
@@ -414,6 +424,8 @@ def assemble_release_assets(
     commits: set[str] = set()
     cargo_lock_hashes: set[str] = set()
     pyproject_hashes: set[str] = set()
+    export_manifest_hashes: set[str] = set()
+    private_source_commits: set[str] = set()
     checksum_lines: list[str] = []
     for wheel in wheels:
         provenance_path = wheel.with_name(wheel.name + PROVENANCE_SUFFIX)
@@ -429,6 +441,7 @@ def assemble_release_assets(
         target = _object_field(record, "target", manifest=provenance_path)
         package = _object_field(record, "package", manifest=provenance_path)
         source = _object_field(record, "source", manifest=provenance_path)
+        public_export = _object_field(source, "public_export", manifest=provenance_path)
         build = _object_field(record, "build", manifest=provenance_path)
         wheel_record = _object_field(record, "wheel", manifest=provenance_path)
         validation = _object_field(record, "validation", manifest=provenance_path)
@@ -521,11 +534,25 @@ def assemble_release_assets(
             raise ReleaseManifestError(
                 f"non-publishable source tree state for {wheel.name}: {tree_state!r}"
             )
+        export_manifest_hash = str(public_export.get("manifest_sha256", ""))
+        private_source_commit = str(
+            public_export.get("private_source_commit", "")
+        ).lower()
+        if SHA256_PATTERN.fullmatch(export_manifest_hash) is None:
+            raise ReleaseManifestError(
+                f"invalid public export manifest hash for {wheel.name}"
+            )
+        if SOURCE_COMMIT_PATTERN.fullmatch(private_source_commit) is None:
+            raise ReleaseManifestError(
+                f"invalid private source commit for {wheel.name}"
+            )
         targets.add(target_id)
         versions.add(version)
         commits.add(commit)
         cargo_lock_hashes.add(str(source.get("cargo_lock_sha256", "")))
         pyproject_hashes.add(str(source.get("pyproject_sha256", "")))
+        export_manifest_hashes.add(export_manifest_hash)
+        private_source_commits.add(private_source_commit)
         checksum_lines.append(expected_checksum.rstrip("\n"))
         records.append(record)
 
@@ -549,6 +576,10 @@ def assemble_release_assets(
         or SHA256_PATTERN.fullmatch(next(iter(pyproject_hashes))) is None
     ):
         raise ReleaseManifestError("release pyproject hashes differ or are missing")
+    if len(export_manifest_hashes) != 1:
+        raise ReleaseManifestError("public export manifest hashes differ")
+    if len(private_source_commits) != 1:
+        raise ReleaseManifestError("private source commits differ")
     commit = next(iter(commits))
     if expected_source_commit is not None and commit != expected_source_commit.lower():
         raise ReleaseManifestError(
@@ -623,6 +654,7 @@ def main() -> None:
         WheelContractError,
         ReleaseManifestError,
     ) as error:
+        _emit_github_error(error)
         raise SystemExit(f"release manifest failed: {error}") from error
     for path in paths:
         print(path)

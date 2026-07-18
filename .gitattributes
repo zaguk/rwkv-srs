@@ -2,6 +2,8 @@
 THIRD_PARTY_LICENSES.txt binary
 
 # Keep generated compliance inputs stable across Windows and Unix checkouts.
+pyproject.toml text eol=lf
+PUBLIC_EXPORT_PROVENANCE.json text eol=lf
 THIRD_PARTY_NOTICES.md text eol=lf
 rust/rwkv-srs-cpu/Cargo.lock text eol=lf
 rust/rwkv-srs-cpu/vendor/** text eol=lf

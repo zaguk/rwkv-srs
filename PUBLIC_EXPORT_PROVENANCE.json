@@ -18,14 +18,14 @@
     {
       "mode": "100644",
       "path": ".gitattributes",
-      "sha256": "2014b2b1d1433e1f5d65b0df6803ff09744f76396e5e5e5d5557e1ff18c2229d",
-      "size": 371
+      "sha256": "d751bf8976e4abdb15c9bb99e0995cdca45d5be79732626aa4cccdb225794974",
+      "size": 440
     },
     {
       "mode": "100644",
       "path": ".github/workflows/public-release.yml",
-      "sha256": "8ec3915f34590d7172f301d76e58607c18c201878c7125fa356c3afd49f09348",
-      "size": 6088
+      "sha256": "f76e541cbab6916848bfd5b24383805530df51875d856ffa92eb7937b2a78ffe",
+      "size": 7663
     },
     {
       "mode": "100644",
@@ -444,8 +444,8 @@
     {
       "mode": "100644",
       "path": "scripts/release_manifest.py",
-      "sha256": "e5e29f3d36208598fc90ce8c945e9c63d0cae9f5cb130bd838c82a10c572112f",
-      "size": 22779
+      "sha256": "fc279d24c49f3bea7ee581eee874e08914ac871e4b2372dffc72c74900f94d93",
+      "size": 24232
     },
     {
       "mode": "100644",
@@ -618,8 +618,8 @@
   ],
   "manifest_note": "File records cover every source-derived export file. This generated PUBLIC_EXPORT_PROVENANCE.json cannot self-hash.",
   "schema_version": 1,
-  "source_commit": "889f286ce20a50a5dc9f3cc959c8ea748942627c",
+  "source_commit": "7d495b00c1b6e4290cfeb5b0d9a82102b94391db",
   "source_file_count": 100,
-  "source_files_sha256": "0a6279a1e52cb10ed822aedf79f7e737b1f5d82f36f1a6682da5b9fe1e10ad9b",
+  "source_files_sha256": "5e861fb4c4299223a0863b3e0076b97c9b76ca672be2616c6ce88cc4cfb1112e",
   "source_repository": "rwkv-srs"
 }
